@@ -1,0 +1,22 @@
+{
+  "name": "tp2-2018-ttads",
+  "version": "1.0.0",
+  "description": "TP 2 1 - Enunciado 1.1 - Desarrollo",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/PatoBengoechea/tp2-2018.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/PatoBengoechea/tp2-2018/issues"
+  },
+  "homepage": "https://github.com/PatoBengoechea/tp2-2018#readme",
+  "dependencies": {
+    "mongoose": "^5.3.4"
+  }
+}
