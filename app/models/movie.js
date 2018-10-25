@@ -6,6 +6,6 @@ var movieSchema= new mongoose.Schema({
 	age: {type: Number, required: true},
 	genre: {type: String, required: true},
   actors: [{ type: mongoose.Schema.Types.ObjectId, ref: 'actor'}]
-});
+}, {collection:'movie'});
 
 mongoose.model('movie', movieSchema);
