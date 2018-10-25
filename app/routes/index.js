@@ -1,5 +1,5 @@
 var router=require('express').Router();
 
-router.use('/routes/movie', require('./movie'));
+router.use('/api/movie', require('./movie'));
 
 module.exports=router;

@@ -1,10 +1,13 @@
-var express = require('express');
-var mongoose = require('mongoose');
-var bodyParser = require('body-parser');
-var cors = require('cors');
-var methodOverride = require('method-override');
-var routes = require('./routes/index');
-var routesmovie = require('./routes/movie');
+const express = require('express');
+const mongoose = require('mongoose');
+const bodyParser = require('body-parser');
+const cors = require('cors');
+const methodOverride = require('method-override');
+//const routes = require('./routes/index');
+//const routesmovie = require('./routes/movie');
+
+mongoose.connect('mongodb://localhost/cinema');
+
 require('./models/movie.js');
 require('./models/actor.js');
 
@@ -17,14 +20,13 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 app.use(methodOverride());
 
-mongoose.connect('mongodb://localhost/movie');
 
 
 
-app.use(routes);
-app.use(routesmovie);
+//app.use(routes);
+//app.use(routesmovie);
 
-//app.use(require('./routes'));
+app.use(require('./routes'));
 
 var router=express.Router();
 
