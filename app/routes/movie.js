@@ -13,4 +13,18 @@ router.get('/', (req, res, next) => {
     .catch(next);
 });
 
+router.get('/:id', (req, res, next) => {
+
+    let id = req.params.id
+    movie.findById(id)
+      .populate('actors')
+      .then(movies =>{
+          if(!movies){ return res.sendStatus(401); }
+          return res.json({'movies': movies})
+      })
+      .catch(next);
+      
+  });
+
+
 module.exports=router;
