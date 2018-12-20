@@ -12,6 +12,7 @@ require('./models/movie.js');
 require('./models/actor.js');
 
 var app = express();
+app.use(require('./routes'));
 app.use(cors());
 
 const port = 3000;
@@ -26,13 +27,13 @@ app.use(methodOverride());
 //app.use(routes);
 //app.use(routesmovie);
 
-app.use(require('./routes'));
+
 
 var router=express.Router();
 
 
 app.use(router);
 
-app.listen(port, () => {
+app.listen(port, (err) => {
   console.log('We are live on ' + port);
 });
