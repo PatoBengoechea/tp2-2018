@@ -26,5 +26,13 @@ router.get('/:id', (req, res, next) => {
       
   });
 
+router.post('/', (req, res, next) => {
+    let name=req.body.name;
+    let genre=req.body.genre;
+    let year=req.body.year;
+    res.send("name:"+name, "genre:"+genre, "year:"+year);
+    //next();
+});
+
 
 module.exports=router;
