@@ -33,7 +33,8 @@ router.post('/', (req, res, next) => {
     let mo = new movie({
         name: req.body.name,
         genre: req.body.genre,
-        year: req.body.year
+        year: req.body.year,
+        img_path: req.body.img_path
     });
 
     mo.save()
