@@ -25,13 +25,26 @@ router.get('/:id', (req, res, next) => {
       .catch(next);
       
   });
-
 router.post('/', (req, res, next) => {
     let name=req.body.name;
     let genre=req.body.genre;
     let year=req.body.year;
-    res.send("name:"+name, "genre:"+genre, "year:"+year);
-    //next();
+    res.send("name:"+name+ ' ' + "genre:"+genre + ' '+ "year:"+year);
+    let mo = new movie({
+        name: req.body.name,
+        genre: req.body.genre,
+        year: req.body.year
+    });
+
+    mo.save()
+        .then(doc => {
+            console.log(doc)
+        })
+    .catch(err => {
+        console.log(err)
+    });
+
+    next();
 });
 
 

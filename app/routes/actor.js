@@ -13,4 +13,19 @@ router.get('/', (req, res, next) => {
     .catch(next);
 });
 
+router.post('/', (req, res, next)=>{
+    let ac = new actor({
+        name: req.body.name,
+        nationality: req.body.nationality
+    });
+    res.send("name:"+req.body.name+ '  ' + "nationality:"+req.body.nationality);
+    ac.save()
+        .then(doc=>{
+            console.log(doc)
+        })
+    .catch(err=>{
+        console.log(err)
+    })
+});
+
 module.exports=router;
