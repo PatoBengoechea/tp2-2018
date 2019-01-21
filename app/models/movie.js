@@ -1,6 +1,7 @@
-//var mongoose = require('mongoose');
+// Llamar al módulo de mongoose
 const mongoose = require('mongoose');
 
+// Crear schema
 var movieSchema= new mongoose.Schema({
 	name: {type: String, required: true},
 	year: {type: Number, required: true},
