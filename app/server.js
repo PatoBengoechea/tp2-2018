@@ -10,7 +10,7 @@ const bodyParser = require('body-parser');
 const cors = require('cors');
 const methodOverride = require('method-override');
 
-// LLamar a express para crear el servidor
+// Instancia de express
 var app = express();
 
 app.use(cors());
@@ -26,11 +26,11 @@ app.use(bodyParser.json());
 app.use(methodOverride());
 
 // Conectar a la DB con el método "connect" de mongoose
-//mongoose.connect('mongodb://localhost/cinema', {useNewUrlParser:true});
+// mongoose.connect('mongodb://localhost/cinema', {useNewUrlParser:true});
 mongoose.connect('mongodb+srv://admin:admin@cluster0-geyoz.mongodb.net/cinema',
   { useNewUrlParser: true }, (err) => {
-    // Conexión exitosa --> mando mensaje indicativo  
-    console.log("We are using MongoDB Atlas");
+    if(err) console.log("Error al conectar a la DB: " +err);  
+    else console.log("We are using MongoDB Atlas"); // Conexión exitosa --> mando mensaje indicativo
 
     require('./models/movie.js');
     require('./models/actor.js');
