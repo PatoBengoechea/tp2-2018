@@ -18,17 +18,16 @@ PASOS BÁSICOS A REALIZAR
     info: https://medium.com/williambastidasblog/estructura-de-una-api-rest-con-nodejs-express-y-mongodb-cdd97637b18b
 
 Modulos faltantes: 
-abmc pelicula  
-/movie/:id 
+abmc pelicula x
+/movie/:id x
 /popular    
 /now-playing
-alta de actores    
-/listar-actores    
-/movie/:actor
-alta 
-comentarios 
-alta 
+comentarios
+alta x
 votos en una pelicula
+alta de actores x
+/listar-actores
+
 
 Modificar nuestro frontend para hacer abmc peliculas solamente. 
 Lo de actores y comentarios solo hacer 
