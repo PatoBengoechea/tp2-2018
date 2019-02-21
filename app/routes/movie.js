@@ -27,7 +27,7 @@ router.get('/:id', (req, res, next) => {
 
 });
 
-// Update movie
+// Create movie
 router.post('/', (req, res, next) => {
     let name = req.body.name;
     let genre = req.body.genre;
@@ -53,15 +53,35 @@ router.post('/', (req, res, next) => {
     next();
 });
 
+//Update movie (de otra forma)
+updateMovie = function(req, res){
+    movie.findById(req.params.id, function(err, movieToUpdate){
+        if(!err){
+            movieToUpdate.name = req.body.name;
+            movieToUpdate.genre = req.body.genre;
+            movieToUpdate.year = req.body.year;
+            movieToUpdate.release_date= req.body.release_date;
+        } else console.log('Ha ocurrido el siguiente eror: ' +err);
+    });
+    movie.save(function(err){
+        if(!err) console.log/('Película actualizada!');
+        else console.log('Ha ocurrido el siguiente eror: ' +err);
+    });
+    res.send(movieToUpdate);
+}
+
+// Controlador para update
+router.put('movie/:id', updateMovie);
+
+// Delete movie
 router.delete('/:id', (req, res, next) => {
     let id = req.params.id;
     movie.findByIdAndRemove(id);
     res.sendStatus(200);
-}
-);
+});
 
 // Votar una película
-router.put('/:id', (req, res, next) => {
+router.put('/vote/:id', (req, res, next) => {
     movie.findById(id);
     if (req.body.vote) {
         movie.vote++;
@@ -82,7 +102,7 @@ router.put('/:id', (req, res, next) => {
 });
 
 // Traer populares
-router.get('/movie/popular', (req, res, next) => {
+router.get('/popular', (req, res, next) => {
     movie.find({ vote: { $gte: 10 } })
         .then(movies => {
             if (!movies) { return res.sendStatus(401); }
@@ -92,7 +112,7 @@ router.get('/movie/popular', (req, res, next) => {
 });
 
 // Traer now-playing
-router.get('/movie/now-playing', (req, res, next) => {
+router.get('/now-playing', (req, res, next) => {
     let date2 = new Date();
     date2.month = date2.getMonth() - 1;
     movie.find({ release_date: { $gte: date2 } })
@@ -104,9 +124,9 @@ router.get('/movie/now-playing', (req, res, next) => {
 });
 
 // Traer películas de un actor
-router.get('/movies/:id_actor', (req, res, next) => {
-    let id_actor = req.params.id_actor;
-    movie.find({ 'actors': id_actor })
+router.get('/movieActor/:id_actor', (req, res, next) => {
+    let id_actor = req.param.id_actor;
+    movie.find({ actors : id_actor })
         .populate('actors')
         .then(actorMovies => {
             if(!actorMovies){ return res.sendStatus(401);}
