@@ -102,7 +102,7 @@ router.put('/vote/:id', (req, res, next) => {
 });
 
 // Traer populares
-router.get('/popular', (req, res, next) => {
+router.get('/movie/popular', (req, res, next) => {
     movie.find({ vote: { $gte: 10 } })
         .then(movies => {
             if (!movies) { return res.sendStatus(401); }
@@ -112,7 +112,7 @@ router.get('/popular', (req, res, next) => {
 });
 
 // Traer now-playing
-router.get('/now-playing', (req, res, next) => {
+router.get('/movie/now-playing', (req, res, next) => {
     let date2 = new Date();
     date2.month = date2.getMonth() - 1;
     movie.find({ release_date: { $gte: date2 } })
