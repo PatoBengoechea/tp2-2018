@@ -114,7 +114,7 @@ router.get('/movie/popular', (req, res, next) => {
 // Traer now-playing
 router.get('/movie/now-playing', (req, res, next) => {
     let date2 = new Date();
-    date2.month = date2.getMonth() - 1;
+    date2.setMonth(date2.getMonth() - 1);
     movie.find({ release_date: { $gte: date2 } })
         .then(movies => {
             if (!movies) { return res.sendStatus(401); }
