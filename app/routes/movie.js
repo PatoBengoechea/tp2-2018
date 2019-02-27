@@ -32,12 +32,16 @@ router.post('/', (req, res, next) => {
     let name = req.body.name;
     let genre = req.body.genre;
     let year = req.body.year;
+    let release_date = req.body.release_date;
+    let vote = req.body.vote;
 
     let mo = new movie({
         name: req.body.name,
         genre: req.body.genre,
         year: req.body.year,
-        img_path: req.body.img_path
+        img_path: req.body.img_path,
+        release_date: req.body.release_date,
+        vote: req.body.vote
     });
 
     mo.save()
@@ -71,7 +75,7 @@ updateMovie = function(req, res){
 }
 
 // Controlador para update
-router.put('movie/:id', updateMovie);
+router.put('/movie/:id', updateMovie);
 
 // Delete movie
 router.delete('/:id', (req, res, next) => {
@@ -82,23 +86,26 @@ router.delete('/:id', (req, res, next) => {
 
 // Votar una película
 router.put('/vote/:id', (req, res, next) => {
-    movie.findById(id);
-    if (req.body.vote) {
-        movie.vote++;
-    }
-    else {
-        movie.vote--;
-    }
-
-    movie.save()
-        .then(doc => {
-            console.log(doc);
-            res.send('Voto actualizado');
-        })
-        .catch(err => {
+    let id = req.params.id;
+    if(req.body.vote){
+        movie.findOneAndUpdate({ "_id": ObjectId(id) }, {$inc:{vote:1}})
+            .catch(err => {
             console.log(err);
             res.send('Ha ocurrido un error, intentelo de nuevo mas tarde');
-        })
+        });
+    }
+    else {
+        movie.findOneAndUpdate({ "_id": ObjectId(id) }, {$inc:{vote:-1}})
+            .catch(err => {
+                console.log(err);
+                res.send('Ha ocurrido un error, intentelo de nuevo mas tarde');
+            });
+    }
+
+
+    next();
+
+
 });
 
 // Traer populares
